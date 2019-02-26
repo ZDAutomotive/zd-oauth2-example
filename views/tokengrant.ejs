@@ -1,0 +1,12 @@
+<p>Request a Authorization Toke?</p>
+
+<form action="/oauth/token" method="post">
+  <div>
+    <div></div>code: <input type="text" name="code" value=<%=code%> /></div>
+    <div></div>client_id: <input type="text" name="client_id" value=<%=client_id%> /></div>
+    <div></div>client_secret:<input type="text" name="client_secret" value=<%=client_secret%> /></div>
+    <div></div>grant_type:<input type="text" name="grant_type" value=<%=grant_type%> /></div>
+    <div></div>redirect_uri:<input type="text" name="redirect_uri" value=<%=redirect_uri%> /></div>
+    <div></div><input type='submit' value='submit'>
+  </div>
+</form>
