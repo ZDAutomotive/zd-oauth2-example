@@ -228,3 +228,11 @@ module.exports.tokenCallback = [login.ensureLoggedIn(), (request, response) => {
       redirect_uri: '/oauth/token/callback'
     })
 }]
+
+module.exports.tokenUse = (request, response) => {
+  response.render('access_protected_api.ejs',{
+    access_token:request.query.access_token,
+    username:request.query.username,
+    token_type:request.query.token_type
+  })
+}

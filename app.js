@@ -37,6 +37,7 @@ app.post('/dialog/authorize/decision', routes.oauth2.decision);
 app.post('/oauth/token', routes.oauth2.token);
 app.get('/oauth/token/callback', routes.oauth2.tokenCallback);
 app.get('/oauth/token/request', routes.oauth2.request);
+app.get('/oauth/token/use', routes.oauth2.tokenUse);
 
 app.get('/api/userinfo', routes.user.info);
 app.get('/api/clientinfo', routes.client.info);

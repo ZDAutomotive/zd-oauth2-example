@@ -1,12 +1,40 @@
 <p>Request a Authorization Toke?</p>
 
-<form action="/oauth/token" method="post">
-  <div>
-    <div></div>code: <input type="text" name="code" value=<%=code%> /></div>
-    <div></div>client_id: <input type="text" name="client_id" value=<%=client_id%> /></div>
-    <div></div>client_secret:<input type="text" name="client_secret" value=<%=client_secret%> /></div>
-    <div></div>grant_type:<input type="text" name="grant_type" value=<%=grant_type%> /></div>
-    <div></div>redirect_uri:<input type="text" name="redirect_uri" value=<%=redirect_uri%> /></div>
-    <div></div><input type='submit' value='submit'>
-  </div>
-</form>
+<div>
+  <form action="/oauth/token" method="post">
+    <div>code: <input type="text" id="code" name="code" value=<%=code%> /></div>
+    <div>client_id: <input type="text" id="client_id" name="client_id" value=<%=client_id%> /></div>
+    <div>client_secret:<input type="text" id="client_secret" name="client_secret" value=<%=client_secret%> /></div>
+    <div>grant_type:<input type="text" id="grant_type" name="grant_type" value=<%=grant_type%> /></div>
+    <div>redirect_uri:<input type="text" id="redirect_uri" name="redirect_uri" value=<%=redirect_uri%> /></div>
+    <div><input type='submit' value="Submit" /></div>
+  </form>
+  <div><input type='button' id="submit" onclick="submit()" value="Submit by Javascript" /></div>
+</div>
+
+<br>
+<div><a href="/">Back to Home</a></div>
+
+<script type="text/javascript">
+  function submit() {
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        console.log(xhr.response);
+        let resBody = JSON.parse(xhr.response)
+        window.location.assign("/oauth/token/use?access_token="+resBody.access_token+"&username="+resBody.username+"&token_type="+resBody.token_type)
+      }
+    }
+    xhr.open('post', '/oauth/token', true);
+    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    let body = {
+      code: document.getElementById("code").value,
+      client_id: document.getElementById("client_id").value,
+      client_secret: document.getElementById("client_secret").value,
+      grant_type: document.getElementById("grant_type").value,
+      redirect_uri: document.getElementById("redirect_uri").value
+    }
+    console.log(body)
+    xhr.send(JSON.stringify(body))
+  }
+</script>
